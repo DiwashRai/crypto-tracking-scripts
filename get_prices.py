@@ -16,6 +16,9 @@ creds = service_account.Credentials.from_service_account_file(
 
 tokens = [ 'BTC', 'ETH', 'ADA', 'LINK', 'XRP' , 'DOT']
 
+updatedDateTime = datetime.datetime.now()
+updatedDateTimeFormatted = updatedDateTime.strftime("%H:%M:00 - %d/%m/%Y")
+
 back24h = datetime.datetime.now() - datetime.timedelta(hours=24)
 back24hFormatted = back24h.strftime("%Y-%m-%d %H:%M:00")
 
@@ -43,3 +46,6 @@ service = build('sheets', 'v4', credentials=creds)
 sheet = service.spreadsheets()
 request = sheet.values().update(spreadsheetId=SPREADSHEET_ID, range='\'Token Prices\'!C4',
                                 valueInputOption="USER_ENTERED", body={"values":update_list}).execute()
+
+request = sheet.values().update(spreadsheetId=SPREADSHEET_ID, range='\'Token Prices\'!B1',
+                                valueInputOption="USER_ENTERED", body={"values": [[ updatedDateTimeFormatted ]] }).execute()
