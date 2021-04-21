@@ -1,0 +1,1 @@
+Miscellaneous scripts used to grab price data for my google sheets
